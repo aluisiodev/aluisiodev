@@ -12,4 +12,4 @@
       <img height="80" width="80" alt="python" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" style="margin: 10px;"/>
       
 ![Snake animation](https://github.com/aluisiodev/aluisiodev/blob/output/github-snake-dark.svg#gh-dark-mode-only)
-
+![Snake animation](https://github.com/aluisiodev/aluisiodev/blob/output/github-snake-light.svg#gh-light-mode-only)
