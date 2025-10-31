@@ -1,0 +1,39 @@
+name: Generate Monochrome Snake
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate Monochrome Snake Animation
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake-monochrome.svg?palette=gray
+            dist/github-snake-dark-monochrome.svg?palette=gray
+
+      - name: Commit generated files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update monochrome snake animation"
+          file_pattern: "dist/*"
+
+      - name: Deploy to output branch
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
