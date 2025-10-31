@@ -23,6 +23,8 @@ jobs:
           outputs: |
             dist/github-snake-monochrome.svg?palette=gray
             dist/github-snake-dark-monochrome.svg?palette=gray
+            dist/github-snake.svg?color_snake=black&color_dots=#cccccc,#999999,#666666,#333333
+
 
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
