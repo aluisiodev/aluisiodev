@@ -1,5 +1,5 @@
 <svg viewBox="-16 -32 880 192" width="880" height="192" xmlns="http://www.w3.org/2000/svg">
-  <desc>Dashboard de contribuições em escala monocromática</desc>
+  <desc>Dashboard de contribuições em escala monocromática (52x7)</desc>
   <style>
     /* Tons de cinza para intensidade dos quadrados */
     .c0 { fill: #ffffff; } /* vazio */
@@ -8,33 +8,51 @@
     .c3 { fill: #333333; } /* intenso */
     .c4 { fill: #000000; } /* máximo */
 
-    /* Cobra em cinza escuro */
+    /* Cobra e barra inferior em cinza escuro */
     .s { fill: #333333; }
-    /* Barra inferior */
     .u { fill: #333333; }
 
     /* Animações da barra inferior */
     .u { transform-origin: 0 0; animation: uAnim 11900ms linear infinite; }
-
     @keyframes uAnim {
       0%, 42%, 100% { transform: scale(0,1); }
       50%, 51% { transform: scale(1,1); }
     }
 
-    /* Cobra animada (movimento) */
+    /* Cobra animada */
     .s { animation: sAnim 11900ms linear infinite; }
     @keyframes sAnim {
       0%, 100% { transform: translate(0px,-16px); }
     }
   </style>
 
-  <!-- Exemplos de quadrados da grade em tons monocromáticos -->
-  <rect class="c0" x="2" y="2" width="12" height="12" rx="2" ry="2"/>
-  <rect class="c1" x="2" y="18" width="12" height="12" rx="2" ry="2"/>
-  <rect class="c2" x="2" y="34" width="12" height="12" rx="2" ry="2"/>
-  <rect class="c3" x="2" y="50" width="12" height="12" rx="2" ry="2"/>
-  <rect class="c4" x="2" y="66" width="12" height="12" rx="2" ry="2"/>
-  <!-- Continue para toda a grade, usando c0-c4 conforme intensidade -->
+  <!-- Grade de 52x7 quadrados -->
+  <!-- Exemplo: preenchendo as 7 linhas para a primeira semana (x=0 a x=12*51) -->
+  <!-- As classes c0-c4 representam a intensidade -->
+  <!-- Para cada quadrado: x = coluna*14, y = linha*16 -->
+  <!-- Aqui apenas algumas linhas iniciais como exemplo -->
+
+  <!-- Semana 1 -->
+  <rect class="c0" x="0" y="0" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c1" x="0" y="16" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c2" x="0" y="32" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c3" x="0" y="48" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c4" x="0" y="64" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c2" x="0" y="80" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c1" x="0" y="96" width="12" height="12" rx="2" ry="2"/>
+
+  <!-- Semana 2 -->
+  <rect class="c1" x="14" y="0" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c0" x="14" y="16" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c2" x="14" y="32" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c3" x="14" y="48" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c4" x="14" y="64" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c3" x="14" y="80" width="12" height="12" rx="2" ry="2"/>
+  <rect class="c2" x="14" y="96" width="12" height="12" rx="2" ry="2"/>
+
+  <!-- Replicar para as 52 semanas -->
+  <!-- A posição x aumenta de 14 em 14, y de 16 em 16 -->
+  <!-- Cada quadrado recebe a classe c0-c4 correspondente à intensidade -->
 
   <!-- Barra inferior animada -->
   <rect class="u" x="0" y="144" width="848.6" height="12"/>
