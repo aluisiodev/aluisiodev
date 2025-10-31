@@ -2,7 +2,6 @@ name: Generate Monochrome Snake
 
 on:
   schedule:
-    # Roda todo dia à meia-noite
     - cron: "0 0 * * *"
   workflow_dispatch:
 
@@ -14,11 +13,9 @@ jobs:
       contents: write
 
     steps:
-      # Pega o conteúdo do repositório
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Gera a cobra monocromática
       - name: Generate Monochrome Snake Animation
         uses: Platane/snk@v3
         with:
@@ -29,14 +26,12 @@ jobs:
             # Modo escuro: cobra branca, quadrados de contribuição cinza
             dist/github-snake-dark.svg?color_snake=FFFFFF&color_dots=222222,444444,666666,888888
 
-      # Commit automático dos arquivos gerados
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Update monochrome snake animation"
           file_pattern: "dist/*"
 
-      # Publica na branch 'output'
       - name: Deploy to output branch
         uses: crazy-max/ghaction-github-pages@v3
         with:
