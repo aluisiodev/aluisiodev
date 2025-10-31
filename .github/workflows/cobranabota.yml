@@ -1,4 +1,4 @@
-name: Generate Monochrome Snake
+name: Generate Grey Snake
 
 on:
   schedule:
@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     permissions:
       contents: write
 
@@ -16,26 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Monochrome Snake Animation
+      - name: Generate Grey Snake
         uses: Platane/snk@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            # Modo claro: cobra preta, quadrados de contribuição cinza
-            dist/github-snake-light.svg?color_snake=000000&color_dots=DDDDDD,BBBBBB,888888,333333
-            # Modo escuro: cobra branca, quadrados de contribuição cinza
-            dist/github-snake-dark.svg?color_snake=FFFFFF&color_dots=222222,444444,666666,888888
+          outputs: dist/github-contribution-grid-snake-grey.svg?palette=grey
 
-      - name: Commit generated files
+      - name: Commit generated file
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update monochrome snake animation"
+          commit_message: "Update grey snake"
           file_pattern: "dist/*"
-
-      - name: Deploy to output branch
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: output
-          build_dir: dist
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
