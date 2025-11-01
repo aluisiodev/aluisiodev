@@ -9,18 +9,22 @@ public class Aluisio
 {
   public void InfoAluisio()
   {
-    private List<string> hobbies = new List<string>();
+    List<string> hobbies = new List<string>();
     hobbies.Add("Escrita");
     hobbies.Add("Livros");
     hobbies.Add("Filmes");
     hobbies.Add("Jogos");
     hobbies.Add("Academia");
+
     int idadeAtual = 21;
     string cargoAtual = "Estagiário de Desenvolvimento de Sistemas";
     string empresa = "Intervalor";
-    Console.WriteLine($"Um jovem entusiasmado de {idadeAtual} anos e com paixão por tecnologia. Comecei programando em Python, depois JavaScript, Java, e agora, estou iniciando minha jornada no C#");
-    Console.WriteLine($"Atualmente, estou trabalhando no cargo de {cargoAtual} pela empresa {Intervalor}.");
-    Console.WriteLine("Além da programação, amo música, especialmente indie rock. Os meus hobbies são:);
+
+    Console.WriteLine($"Um jovem entusiasmado de {idadeAtual} anos e com paixão por tecnologia." +
+"Comecei programando em Python, depois JavaScript, Java, e agora, estou iniciando minha jornada no C#");
+    Console.WriteLine($"Atualmente, estou trabalhando no cargo de {cargoAtual} pela empresa {empresa}.");
+    Console.WriteLine("Além da programação, amo música, especialmente indie rock. Os meus hobbies são:");
+
     foreach (string str in hobbies)
     {
     Console.WriteLine(str);
