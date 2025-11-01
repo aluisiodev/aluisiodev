@@ -103,6 +103,6 @@ public class Aluisio
   Espero que sua visita se converta em uma troca de ideias entre nós :)))
 </p>
 
-![](https://media.tenor.com/HKyi2qRvRJsAAAAM/killua-hxh-killua.gif)
+![](https://i.pinimg.com/originals/6f/e6/27/6fe62789fc50c205afba2471a1ffd106.gif)
 
 <p>Até breve! 🫡</p>
