@@ -35,11 +35,11 @@ public class Aluisio
 
     if (querConectar && respostaUsuario == "sim")
     {
-    Console.WriteLine("\n🚀 Acesse o LinkedIn e meu Instagram pelos ícones respectivos!!!");
+    Console.WriteLine("Acesse o LinkedIn e meu Instagram pelos ícones respectivos!!!");
     }
     else
     {
-            Console.WriteLine("\nPoxa :( ");
+            Console.WriteLine("Poxa :( ");
     }
   }
 }
