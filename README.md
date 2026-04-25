@@ -29,15 +29,17 @@ public class Aluisio
     {
     Console.WriteLine(str);
     }
-    string usuarioVisitante;
+
+    string respostaUsuario = "sim"; // Simulação de entrada
     bool querConectar = true;
-    if (usuarioVisitante == querConectar)
+
+    if (querConectar && respostaUsuario == "sim")
     {
-      Console.WriteLine("Acesse o Linkedin e meu Instagram pelos ícones respectivos!!!");
+    Console.WriteLine("\n🚀 Acesse o LinkedIn e meu Instagram pelos ícones respectivos!!!");
     }
     else
     {
-      Console.WriteLine("Poxa :( ");
+            Console.WriteLine("\nPoxa :( ");
     }
   }
 }
