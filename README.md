@@ -30,7 +30,7 @@ public class Aluisio
     Console.WriteLine(str);
     }
 
-    string respostaUsuario = "sim"; // Simulação de entrada
+    string respostaUsuario = "sim";
     bool querConectar = true;
 
     if (querConectar && respostaUsuario == "sim")
