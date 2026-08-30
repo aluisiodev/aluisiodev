@@ -1,22 +1,3 @@
-"""
-gerar_svg.py — monta dark_mode.svg e light_mode.svg
-
-Rode sempre que quiser mudar os textos do README:
-
-    python gerar_svg.py
-
-Nao precisa de token nem internet. Quem atualiza os NUMEROS todo dia
-e o today.py, rodando sozinho pelo GitHub Actions.
-
-------------------------------------------------------------------
-EDITE APENAS O BLOCO "CONFIG".
-------------------------------------------------------------------
-"""
-
-# ==================================================================
-# CONFIG
-# ==================================================================
-
 TITULO = "aluisio@github"
 
 # Linhas da coluna da direita. Tipos disponiveis:
