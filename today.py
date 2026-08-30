@@ -72,6 +72,12 @@ def simple_request(func_name, query, variables):
     """
     request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
     if request.status_code == 200:
+        erros = request.json().get('errors')
+        if erros:
+            print(f'\n   AVISO: a API respondeu 200 mas reportou erros parciais em {func_name}:')
+            for e in erros[:5]:
+                print('     -', e.get('type', ''), e.get('message', ''))
+            print()
         return request
     if request.status_code == 401:
         print("\nERRO 401 - Bad credentials. O token foi rejeitado pelo GitHub.\n")
@@ -286,8 +292,11 @@ def cache_builder(edges, comment_size, force_cache, loc_add=0, loc_del=0):
     cache_comment = data[:comment_size] # save the comment block
     data = data[comment_size:] # remove those lines
     for index in range(len(edges)):
+        repo_atual = edges[index].get('node') if isinstance(edges[index], dict) else None
+        if not repo_atual or not repo_atual.get('nameWithOwner'):
+            continue  # repositorio nulo, ignorado
         repo_hash, commit_count, *__ = data[index].split()
-        if repo_hash == hashlib.sha256(edges[index]['node']['nameWithOwner'].encode('utf-8')).hexdigest():
+        if repo_hash == hashlib.sha256(repo_atual['nameWithOwner'].encode('utf-8')).hexdigest():
             try:
                 if int(commit_count) != edges[index]['node']['defaultBranchRef']['target']['history']['totalCount']:
                     # if commit count has changed, update loc for that repo
@@ -318,8 +327,12 @@ def flush_cache(edges, filename, comment_size):
     with open(filename, 'w') as f:
         f.writelines(data)
         for node in edges:
-            f.write(hashlib.sha256(node['node']['nameWithOwner'].encode('utf-8')).hexdigest() + ' 0 0 0 0\n')
-
+            repo = node.get('node') if isinstance(node, dict) else None
+            nome = repo.get('nameWithOwner') if repo else None
+            if not nome:  # mantem a linha para nao desalinhar o cache
+                f.write(hashlib.sha256(b'repositorio-nulo').hexdigest() + ' 0 0 0 0\n')
+                continue
+            f.write(hashlib.sha256(nome.encode('utf-8')).hexdigest() + ' 0 0 0 0\n')
 
 def add_archive():
     """
@@ -354,10 +367,22 @@ def force_close_file(data, cache_comment):
 
 def stars_counter(data):
     """
-    Count total stars in repositories owned by me
+    Soma as estrelas dos repositorios.
+    Itens nulos (repositorio que o token nao enxerga, ou apagado no meio
+    da consulta) sao ignorados em vez de derrubar o script.
     """
     total_stars = 0
-    for node in data: total_stars += node['node']['stargazers']['totalCount']
+    ignorados = 0
+    for node in data:
+        repo = node.get('node') if isinstance(node, dict) else None
+        if not repo or repo.get('stargazers') is None:
+            ignorados += 1
+            continue
+        total_stars += repo['stargazers']['totalCount']
+    if ignorados:
+        print(f'\n   AVISO: {ignorados} repositorio(s) vieram nulos da API e foram ignorados.')
+        print('   Se a contagem de estrelas parecer baixa, edite o token e confirme')
+        print("   que 'Repository access' esta em 'All repositories'.\n")
     return total_stars
 
 
