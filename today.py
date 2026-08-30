@@ -5,15 +5,39 @@ import os
 from lxml import etree
 import time
 import hashlib
+import sys
 
 # Fine-grained personal access token with All Repositories access:
 # Account permissions: read:Followers, read:Starring, read:Watching
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
-HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
-USER_NAME = os.environ['USER_NAME']  # seu usuario do GitHub
-# Data de nascimento no formato AAAA-MM-DD (secret BIRTHDAY). Se nao existir, usa a data abaixo.
-BIRTHDAY = os.environ.get('BIRTHDAY', '2004-08-19')
+def _secret(nome, obrigatorio=True, padrao=None):
+    """Le um secret e explica direito o que fazer quando ele nao chegou."""
+    valor = (os.environ.get(nome) or '').strip()
+    if valor:
+        return valor
+    if not obrigatorio:
+        return padrao
+    print(f"\nERRO: o secret {nome} chegou vazio.\n")
+    print("O GitHub Actions substitui secrets inexistentes por string vazia,")
+    print("entao o script roda mas a API recusa com 401 Bad credentials.\n")
+    print("Confira em: Settings > Secrets and variables > Actions")
+    print("  1. O secret precisa estar na aba SECRETS, nao na aba VARIABLES.")
+    print(f"  2. O nome tem que ser exatamente {nome} (maiusculas e underscore).")
+    print("  3. Precisa ser 'Repository secret', nao 'Environment secret'.\n")
+    sys.exit(1)
+
+
+ACCESS_TOKEN = _secret('ACCESS_TOKEN')
+USER_NAME = _secret('USER_NAME')
+BIRTHDAY = _secret('BIRTHDAY', obrigatorio=False, padrao='2004-08-19')
+
+try:
+    datetime.datetime.strptime(BIRTHDAY, '%Y-%m-%d')
+except ValueError:
+    sys.exit(f"ERRO: BIRTHDAY = '{BIRTHDAY}'. Use o formato AAAA-MM-DD, ex: 2004-08-19")
+
+HEADERS = {'authorization': 'token ' + ACCESS_TOKEN}
 QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
 
@@ -49,6 +73,25 @@ def simple_request(func_name, query, variables):
     request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS)
     if request.status_code == 200:
         return request
+    if request.status_code == 401:
+        print("\nERRO 401 - Bad credentials. O token foi rejeitado pelo GitHub.\n")
+        print(f"O token recebido tem {len(ACCESS_TOKEN)} caracteres e comeca com '{ACCESS_TOKEN[:10]}'.")
+        print("Um token valido tem ~93 caracteres e comeca com 'github_pat_'")
+        print("(fine-grained) ou ~40 caracteres comecando com 'ghp_' (classico).\n")
+        print("Causas mais comuns:")
+        print("  - Voce colou o NOME do token em vez do valor dele.")
+        print("  - O token expirou ou foi revogado.")
+        print("  - O token foi criado depois deste secret e o secret nao foi atualizado.")
+        print("  - O token vazou em algum commit publico e o GitHub revogou sozinho.\n")
+        print("Solucao: gere um token novo e atualize o secret ACCESS_TOKEN.\n")
+        sys.exit(1)
+    if request.status_code == 403:
+        print("\nERRO 403 - o token e valido, mas nao tem as permissoes necessarias.\n")
+        print("Edite o token e confirme:")
+        print("  Repository access: All repositories")
+        print("  Repository permissions: Contents, Metadata, Commit statuses, Pull requests (read)")
+        print("  Account permissions: Followers, Starring, Watching (read)\n")
+        sys.exit(1)
     raise Exception(func_name, ' has failed with a', request.status_code, request.text, QUERY_COUNT)
 
 
