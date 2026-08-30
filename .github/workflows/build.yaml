@@ -31,6 +31,35 @@ jobs:
       - name: Instalar dependencias
         run: python -m pip install -r cache/requirements.txt
 
+      - name: Conferir os secrets
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+          BIRTHDAY: ${{ secrets.BIRTHDAY }}
+        run: |
+          erro=0
+          if [ -z "$ACCESS_TOKEN" ]; then
+            echo "::error::O secret ACCESS_TOKEN esta vazio ou nao existe."
+            erro=1
+          else
+            echo "ACCESS_TOKEN: ${#ACCESS_TOKEN} caracteres (esperado ~93 ou ~40)"
+          fi
+          if [ -z "$USER_NAME" ]; then
+            echo "::error::O secret USER_NAME esta vazio ou nao existe."
+            erro=1
+          else
+            echo "USER_NAME: ${#USER_NAME} caracteres"
+          fi
+          if [ -z "$BIRTHDAY" ]; then
+            echo "::warning::BIRTHDAY nao definido; usando a data padrao do script."
+          else
+            echo "BIRTHDAY: definido"
+          fi
+          if [ "$erro" = "1" ]; then
+            echo "Cadastre em: Settings > Secrets and variables > Actions > aba Secrets"
+            exit 1
+          fi
+
       - name: Atualizar os SVGs
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
