@@ -1,4 +1,4 @@
-TITULO = "aluisio@github"
+TITULO = "aluisio@alves"
 
 # Linhas da coluna da direita. Tipos disponiveis:
 #   ("titulo", "texto")              -> cabecalho de secao com tracos
