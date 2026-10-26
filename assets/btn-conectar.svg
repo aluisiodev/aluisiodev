@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 72" width="560" height="72" role="img" aria-label="./conectar — clique para executar"><title>./conectar — clique para executar</title>
+
+<defs>
+  <linearGradient id="bc-fill" x1="0" x2="1"><stop offset="0" stop-color="#9d5cff"/><stop offset="1" stop-color="#ff2ec4"/></linearGradient>
+  <linearGradient id="bc-shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <filter id="bc-glow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+  <clipPath id="bc-clip"><path d="M20 8 H554 V50 L540 64 H6 V22 Z"/></clipPath>
+</defs>
+<path d="M20 8 H554 V50 L540 64 H6 V22 Z" fill="url(#bc-fill)" filter="url(#bc-glow)" opacity="0.55">
+  <animate attributeName="opacity" values="0.35;0.8;0.35" dur="2s" repeatCount="indefinite"/></path>
+<path d="M20 8 H554 V50 L540 64 H6 V22 Z" fill="url(#bc-fill)"/>
+<g clip-path="url(#bc-clip)">
+  <rect x="-160" y="0" width="120" height="72" fill="url(#bc-shine)" transform="skewX(-20)">
+    <animate attributeName="x" values="-160;640;640" keyTimes="0;0.45;1" dur="3.2s" repeatCount="indefinite"/></rect>
+</g>
+<path d="M22 16 H54 V48 L46 56 H14 V24 Z" fill="#05030c"/>
+<path d="M29 26 L43 36 L29 46 Z" fill="#9d5cff">
+  <animate attributeName="opacity" values="1;0.35;1" dur="1.2s" repeatCount="indefinite"/></path>
+<g font-family="'JetBrains Mono','Fira Code',ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace">
+  <text x="68" y="36" font-size="11" font-weight="700" fill="#05030c" letter-spacing="2" opacity="0.75">ABRIR CANAL · LINKEDIN</text>
+  <text x="68" y="55" font-size="19" font-weight="800" fill="#05030c">./conectar</text>
+  <path d="M418 20 H542 V44 L534 52 H410 V28 Z" fill="#05030c"/>
+  <text x="476" y="41" font-size="12" font-weight="700" fill="#9d5cff" text-anchor="middle" letter-spacing="3">EXECUTAR
+    <animate attributeName="opacity" values="1;1;0.25;1" keyTimes="0;0.6;0.8;1" dur="1.4s" repeatCount="indefinite"/></text>
+</g>
+<path d="M6 48 V64 H22 M538 8 H554 V24" fill="none" stroke="#e8fdff" stroke-width="2" opacity="0.8"/>
+
+</svg>
