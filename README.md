@@ -20,6 +20,11 @@
   <a href="https://github.com/aluisiodev/doce-e-afeto"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/repo-doce-e-afeto-light.svg"><img src="./assets/repo-doce-e-afeto.svg" width="49%" alt="Doce & Afeto — SPA que amplia a prospecção e a divulgação da confeitaria Doce & Afeto."></picture></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/KaykyCrespo/cinto-inteligente-deteccao-quedas"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/repo-tcc-light.svg"><img src="./assets/repo-tcc.svg" width="49%" alt="Cinto Inteligente — TCC em equipe: cinto que detecta quedas de idosos com IA e avisa a família pelo Telegram."></picture></a>
+  <a href="https://github.com/aluisiodev/Deskmate"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/repo-deskmate-light.svg"><img src="./assets/repo-deskmate.svg" width="49%" alt="Deskmate — agent de IA open source que se pluga em qualquer service desk. Ideia, design e código meus."></picture></a>
+</p>
+
 </details>
 
 <details>
@@ -60,6 +65,8 @@ $ ls ./repos --destaque
 
 - **[MiraV](https://github.com/aluisiodev/MiraV)** · site de um projeto acadêmico, feito para prospectar potenciais clientes.
 - **[Doce & Afeto](https://github.com/aluisiodev/doce-e-afeto)** · SPA para aumentar a prospecção e a divulgação da confeitaria Doce & Afeto.
+- **[Cinto Inteligente](https://github.com/KaykyCrespo/cinto-inteligente-deteccao-quedas)** · TCC em equipe: cinto que detecta quedas de idosos com IA e avisa a família pelo Telegram.
+- **[Deskmate](https://github.com/aluisiodev/Deskmate)** · agent de IA open source que se pluga em qualquer service desk. Ideia, design e código meus (em construção).
 
 ```console
 $ ./conectar

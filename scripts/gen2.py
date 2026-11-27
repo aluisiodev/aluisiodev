@@ -337,9 +337,9 @@ def projected_card(uid, W, H, label, readout, content_fn, title_for_a11y, accent
     return svg_wrap(W, H, "".join(b), title_for_a11y)
 
 
-def repo_card(uid, slug, title, tag, desc, accent):
+def repo_card(uid, slug, title, tag, desc, accent, title_size=30):
     def content(x, y, w, h):
-        out = [f'<text x="{x+22}" y="{y+74}" font-size="30" font-weight="800" fill="{accent}" filter="url(#{uid}-glow)">{escape(title)}</text>',
+        out = [f'<text x="{x+22}" y="{y+74}" font-size="{title_size}" font-weight="800" fill="{accent}" filter="url(#{uid}-glow)">{escape(title)}</text>',
                f'<path d="{chamfer(x+22, y+86, len(tag)*7.4+22, 22, 6)}" fill="none" stroke="{accent}"/>',
                f'<text x="{x+33}" y="{y+101}" font-size="12" fill="{accent}">{escape(tag)}</text>']
         for i, line in enumerate(desc):
@@ -431,6 +431,12 @@ def build_all():
         "repo-doce-e-afeto": repo_card(
             "rd", "doce-e-afeto", "Doce & Afeto", "SPA · confeitaria",
             ["SPA que amplia a prospecção", "e a divulgação da", "confeitaria Doce & Afeto."], MAGENTA),
+        "repo-tcc": repo_card(
+            "rt", "cinto-inteligente", "Cinto Inteligente", "TCC · em equipe",
+            ["Cinto que detecta quedas de", "idosos com IA e avisa a", "família pelo Telegram."], VIOLET, title_size=25),
+        "repo-deskmate": repo_card(
+            "rk", "Deskmate", "Deskmate", "open source · em construção",
+            ["Agent de IA que se pluga", "em qualquer service desk.", "Ideia, design e código meus."], YELLOW),
         "conectar": connect_card(),
     }
 
